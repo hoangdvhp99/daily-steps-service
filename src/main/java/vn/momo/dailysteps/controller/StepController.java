@@ -34,4 +34,22 @@ public class StepController extends BaseController {
             return response(error(exception));
         }
     }
+
+    @GetMapping("/total-steps/weekly/{userId}")
+    public ResponseEntity<?> getWeeklyTotalSteps(@PathVariable long userId) {
+        try {
+            return ResponseEntity.ok(new ResultDTO(200, "SUCCESS", stepService.getWeeklyTotalSteps(userId)));
+        } catch (Exception exception) {
+            return response(error(exception));
+        }
+    }
+
+    @GetMapping("/total-steps/monthly/{userId}")
+    public ResponseEntity<?> getMonthlyTotalSteps(@PathVariable long userId) {
+        try {
+            return ResponseEntity.ok(new ResultDTO(200, "SUCCESS", stepService.getMonthlyTotalSteps(userId)));
+        } catch (Exception exception) {
+            return response(error(exception));
+        }
+    }
 }
