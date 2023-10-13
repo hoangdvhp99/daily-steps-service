@@ -21,7 +21,7 @@ public class DailyStepEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", columnDefinition = "DATE")
     private Date createdDate;
 
     @Column(name = "steps")
