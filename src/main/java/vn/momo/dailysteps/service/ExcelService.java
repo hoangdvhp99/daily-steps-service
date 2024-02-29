@@ -3,21 +3,26 @@ package vn.momo.dailysteps.service;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.*;
 
 @Service
 public class ExcelService {
-    public Map<String, List<String>> getMapHoDanTuFileExcel(String filePath) {
+    public Map<String, List<String>> getMapHoDanTuFileExcel(MultipartFile file) {
+
+
         Map<String, List<String>> mapHoDan = new HashMap<>();
 
-        try (FileInputStream fis = new FileInputStream(new File(filePath));
-             Workbook workbook = new XSSFWorkbook(fis)) {
+        try (
+            InputStream is = file.getInputStream();
+            Workbook workbook = new XSSFWorkbook(is)
+        ) {
             String key = "";
-            List<String> listDan = new ArrayList<>();
-
+            List<String> listDan;
             Sheet sheet = workbook.getSheetAt(0); // Read the first sheet
             for (Row row : sheet) {
                 Cell cell0 = row.getCell(0); // Get the first cell
@@ -33,9 +38,6 @@ public class ExcelService {
                 }
                 listDan.add(getCellValue(cell0));
                 mapHoDan.put(key, listDan);
-
-//                // Print the value of the first cell
-//                System.out.print(getCellValue(cell0) + "\t" + getCellValue(cell1));
             }
 
         } catch (Exception e) {

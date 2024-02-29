@@ -2,15 +2,6 @@ server:
   port: ${JAVA_PORT_DEFAULT:8080}
 
 spring:
-  # JDBC config
-  datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/momo_daily_steps}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:123456}
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      enabled: true
-      maximum-pool-size: 20
   jpa:
     hibernate:
       ddl-auto: none
@@ -18,18 +9,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
-  #docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3.9.29-management
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-
-rabbitmq:
-  queue:
-    name: my_queue
-  exchange:
-    name: my_exchange
-  routing:
-    key: my_routing_key
-
